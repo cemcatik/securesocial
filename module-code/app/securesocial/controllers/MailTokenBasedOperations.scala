@@ -34,7 +34,7 @@ import scala.concurrent.Future
  * The base controller for password reset and password change operations
  *
  */
-abstract class MailTokenBasedOperations[U] extends SecureSocial[U] {
+trait MailTokenBasedOperations[U] extends SecureSocial[U] {
   val Success = "success"
   val Error = "error"
   val Email = "email"
