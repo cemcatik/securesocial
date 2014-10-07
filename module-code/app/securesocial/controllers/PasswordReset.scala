@@ -50,7 +50,7 @@ trait BasePasswordReset[U] extends MailTokenBasedOperations[U] {
       tuple(
         BaseRegistration.Password1 -> nonEmptyText.verifying(PasswordValidator.constraint),
         BaseRegistration.Password2 -> nonEmptyText
-      ).verifying(Messages(BaseRegistration.PasswordsDoNotMatch), passwords => passwords._1 == passwords._2)
+      ).verifying(BaseRegistration.PasswordsDoNotMatch, passwords => passwords._1 == passwords._2)
   )
 
   /**
