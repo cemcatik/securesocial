@@ -30,6 +30,7 @@ trait RoutesService {
   def faviconPath: Call
   def jqueryPath: Call
   def customCssPath: Option[Call]
+  def landingPageUrl: String
 }
 
 object RoutesService {
@@ -94,5 +95,7 @@ object RoutesService {
       logger.debug("[securesocial] custom css path = %s".format(path))
       path
     }
+
+    override def landingPageUrl = "/"
   }
 }
