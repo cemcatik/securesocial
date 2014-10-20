@@ -160,11 +160,6 @@ object ProviderControllerHelper {
   val onLoginGoTo = "securesocial.onLoginGoTo"
 
   /**
-   * The root path
-   */
-  val Root = "/"
-
-  /**
    * The application context
    */
   val ApplicationContext = "application.context"
@@ -174,9 +169,11 @@ object ProviderControllerHelper {
    *
    * @return
    */
-  def landingUrl = Play.configuration.getString(onLoginGoTo).getOrElse(
-    Play.configuration.getString(ApplicationContext).getOrElse(Root)
-  )
+  def landingUrl(implicit env: RuntimeEnvironment[_]) =
+    Play.configuration.getString(onLoginGoTo).getOrElse(
+      Play.configuration.getString(ApplicationContext).getOrElse(
+        env.routes.landingPageUrl)
+    )
 
   /**
    * Returns the url that the user should be redirected to after login
@@ -184,5 +181,5 @@ object ProviderControllerHelper {
    * @param session
    * @return
    */
-  def toUrl(session: Session) = session.get(SecureSocial.OriginalUrlKey).getOrElse(ProviderControllerHelper.landingUrl)
+  def toUrl(session: Session)(implicit env: RuntimeEnvironment[_]) = session.get(SecureSocial.OriginalUrlKey).getOrElse(ProviderControllerHelper.landingUrl)
 }
